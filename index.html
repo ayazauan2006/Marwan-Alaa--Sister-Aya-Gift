@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alaa &amp; Marwan — Wedding Invitation</title>
+<meta name="description" content="You're invited to the wedding of Alaa &amp; Marwan — January 2, 2028">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Cormorant:wght@300;500;600&family=Amiri:ital@0;1&family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --navy:#1b3654;
+    --navy-deep:#122439;
+    --cream:#f8f4ec;
+    --cream-soft:#f1ead9;
+    --gold:#b8934f;
+    --gold-soft:#d9c091;
+    --ink:#2a3644;
+    --line: rgba(27,54,84,0.18);
+    --shadow: 0 18px 40px rgba(18,36,57,0.14);
+    --serif-en: 'Cormorant Garamond', serif;
+    --display-en: 'Cormorant', serif;
+    --serif-ar: 'Aref Ruqaa', serif;
+    --body-ar: 'Cairo', sans-serif;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:var(--serif-en);
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  html[dir="rtl"] body{ font-family: var(--body-ar); }
+  html[dir="rtl"] .display{ font-family: var(--serif-ar); }
+
+  .display{ font-family: var(--display-en); }
+
+  a{color:inherit;}
+  button{font-family:inherit;}
+
+  /* ---------- Background texture ---------- */
+  .petals-bg{
+    position:fixed; inset:0; z-index:-1; pointer-events:none;
+    background:
+      radial-gradient(ellipse 60% 40% at 10% 8%, rgba(184,147,79,0.08), transparent 60%),
+      radial-gradient(ellipse 50% 35% at 92% 85%, rgba(27,54,84,0.06), transparent 60%),
+      var(--cream);
+  }
+
+  /* ---------- Language toggle ---------- */
+  .lang-switch{
+    position:fixed; top:18px; z-index:50;
+    inset-inline-end:18px;
+    display:flex; background:rgba(248,244,236,0.9);
+    border:1px solid var(--line); border-radius:999px;
+    padding:4px; backdrop-filter:blur(6px);
+    box-shadow: var(--shadow);
+  }
+  .lang-switch button{
+    border:none; background:transparent; cursor:pointer;
+    padding:7px 16px; border-radius:999px;
+    font-size:13px; letter-spacing:0.04em; color:var(--navy);
+    transition:background .25s ease, color .25s ease;
+  }
+  .lang-switch button.active{ background:var(--navy); color:var(--cream); }
+
+  /* ---------- Music toggle ---------- */
+  .music-btn{
+    position:fixed; bottom:22px; z-index:50;
+    inset-inline-end:18px;
+    width:52px; height:52px; border-radius:50%;
+    background:var(--navy); color:var(--cream-soft);
+    border:none; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:var(--shadow);
+  }
+  .music-btn svg{ width:22px; height:22px; }
+  .music-btn .bars{ display:flex; gap:3px; align-items:flex-end; height:16px; }
+  .music-btn .bars span{
+    width:3px; background:var(--cream-soft); border-radius:2px;
+    animation: bar 0.9s ease-in-out infinite;
+  }
+  .music-btn.paused .bars span{ animation-play-state:paused; height:5px !important; }
+  .music-btn .bars span:nth-child(1){ animation-delay:0s; }
+  .music-btn .bars span:nth-child(2){ animation-delay:.2s; }
+  .music-btn .bars span:nth-child(3){ animation-delay:.4s; }
+  @keyframes bar{
+    0%,100%{ height:5px; } 50%{ height:16px; }
+  }
+
+  /* =================== COVER =================== */
+  .cover{
+    min-height:100svh;
+    display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
+    padding:32px 18px;
+    position:relative;
+  }
+  .cover::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      radial-gradient(circle at 15% 20%, rgba(217,192,145,0.10) 0, transparent 26%),
+      radial-gradient(circle at 85% 78%, rgba(217,192,145,0.08) 0, transparent 30%);
+  }
+  .invite-card{
+    position:relative;
+    width:min(380px, 100%);
+    background:var(--cream);
+    border-radius:6px;
+    padding:52px 30px 44px;
+    text-align:center;
+    box-shadow:0 30px 70px rgba(0,0,0,0.35);
+  }
+  .invite-card .corner{ position:absolute; width:54px; height:54px; opacity:0.85; }
+  .invite-card .corner.tl{ top:12px; inset-inline-start:12px; }
+  .invite-card .corner.tr{ top:12px; inset-inline-end:12px; transform:scaleX(-1); }
+  .invite-card .corner.bl{ bottom:12px; inset-inline-start:12px; transform:scaleY(-1); }
+  .invite-card .corner.br{ bottom:12px; inset-inline-end:12px; transform:scale(-1,-1); }
+
+  .invite-names{
+    font-size:clamp(30px,7vw,38px);
+    color:var(--navy);
+    line-height:1.15;
+    letter-spacing:0.01em;
+  }
+  .invite-amp{
+    display:block; margin:6px 0; font-style:italic;
+    color:var(--gold); font-size:20px;
+  }
+  .invite-rule{
+    width:64px; height:1px; background:var(--gold-soft);
+    margin:18px auto;
+  }
+  .invite-date{ font-size:17px; color:var(--navy); letter-spacing:0.03em; }
+  .invite-sub{ margin-top:14px; font-size:15px; color:#6b6455; font-style:italic; }
+  .open-btn{
+    margin-top:28px;
+    background:var(--navy); color:var(--cream);
+    border:none; padding:13px 40px; border-radius:999px;
+    font-family:var(--display-en); font-size:17px; letter-spacing:0.03em;
+    cursor:pointer;
+    box-shadow:0 10px 22px rgba(27,54,84,0.35);
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  html[dir="rtl"] .open-btn{ font-family: var(--serif-ar); font-size:18px; }
+  .open-btn:hover{ transform:translateY(-2px); box-shadow:0 14px 28px rgba(27,54,84,0.4); }
+
+  .site{ display:none; }
+  .site.revealed{ display:block; animation:fadeIn .7s ease both; }
+  @keyframes fadeIn{ from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:none;} }
+  .cover.hidden{ display:none; }
+
+  /* =================== SECTIONS =================== */
+  section{
+    padding:76px 22px;
+    max-width:640px;
+    margin:0 auto;
+    text-align:center;
+    position:relative;
+  }
+  .eyebrow{
+    font-size:12px; letter-spacing:0.16em; color:var(--gold);
+    font-family:var(--serif-en); font-style:italic;
+  }
+  html[dir="rtl"] .eyebrow{ font-family:var(--serif-ar); letter-spacing:0; font-style:normal; font-size:15px;}
+  h2{
+    font-size:clamp(24px,5vw,30px);
+    color:var(--navy); margin:8px 0 6px;
+    font-weight:600;
+  }
+  .lead{ color:#5a5346; font-size:16px; max-width:420px; margin:0 auto; line-height:1.6; }
+
+  .ornament{
+    width:120px; margin:26px auto; opacity:.8;
+  }
+
+  /* Frame around couple names */
+  .frame-wrap{ margin:38px auto 10px; max-width:320px; position:relative; }
+  .frame-wrap svg{ width:100%; height:auto; }
+  .frame-names{
+    position:absolute; inset:0;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    padding:0 40px;
+  }
+  .frame-names .n1, .frame-names .n2{ font-size:clamp(22px,5.4vw,28px); color:var(--navy); }
+  .frame-names .amp{ color:var(--gold); font-style:italic; font-size:16px; margin:2px 0; }
+
+  .couple-block{ margin-top:56px; }
+  .couple-name{ font-size:clamp(26px,6vw,32px); color:var(--navy); margin:0; }
+  .couple-role{ font-size:12px; letter-spacing:0.2em; color:#8a8271; margin:6px 0 30px; }
+  html[dir="rtl"] .couple-role{ letter-spacing:0.05em; font-family:var(--body-ar); font-size:14px;}
+  .couple-amp{ color:var(--gold); font-style:italic; font-size:19px; margin:4px 0; }
+
+  .divider{
+    width:100%; max-width:360px; margin:34px auto;
+    display:flex; align-items:center; gap:12px; color:var(--gold-soft);
+  }
+  .divider::before, .divider::after{ content:""; flex:1; height:1px; background:var(--line); }
+
+  /* Gallery — creative masonry of real engagement photos */
+  .gallery{
+    column-count:2; column-gap:14px; margin-top:28px;
+  }
+  .gallery figure{
+    margin:0 0 14px; break-inside:avoid; position:relative;
+    border-radius:6px; overflow:hidden;
+    background:var(--cream-soft);
+    box-shadow:0 10px 24px rgba(18,36,57,0.14);
+    border:1px solid var(--line);
+    cursor:zoom-in;
+  }
+  .gallery figure::after{
+    content:"";
+    position:absolute; inset:0;
+    background:linear-gradient(180deg, transparent 60%, rgba(18,36,57,0.35) 100%);
+    opacity:0; transition:opacity .3s ease;
+  }
+  .gallery figure:hover::after{ opacity:1; }
+  .gallery figure:nth-child(3n+1){ margin-top:26px; }
+  .gallery img{
+    width:100%; height:auto; display:block;
+    transition:transform .5s ease;
+  }
+  .gallery figure:hover img{ transform:scale(1.04); }
+  .gallery figcaption{
+    position:absolute; inset-inline-start:12px; bottom:10px;
+    color:#fff; font-size:12px; letter-spacing:.04em;
+    opacity:0; transition:opacity .3s ease; z-index:1;
+    font-family:var(--serif-en); font-style:italic;
+  }
+  html[dir="rtl"] .gallery figcaption{ font-family:var(--serif-ar); font-style:normal; }
+  .gallery figure:hover figcaption{ opacity:1; }
+
+  /* Lightbox */
+  .lightbox{
+    position:fixed; inset:0; z-index:100; background:rgba(18,24,33,0.92);
+    display:none; align-items:center; justify-content:center; padding:30px;
+  }
+  .lightbox.open{ display:flex; }
+  .lightbox img{
+    max-width:min(560px,92vw); max-height:86vh; border-radius:6px;
+    box-shadow:0 30px 70px rgba(0,0,0,0.5);
+  }
+  .lightbox-close{
+    position:absolute; top:22px; inset-inline-end:22px;
+    width:40px; height:40px; border-radius:50%; border:none;
+    background:rgba(248,244,236,0.15); color:#f8f4ec; font-size:20px;
+    cursor:pointer; display:flex; align-items:center; justify-content:center;
+  }
+
+  /* Reception info */
+  .time-big{ font-size:34px; color:var(--navy); font-family:var(--display-en); margin:18px 0 4px; }
+  .date-row{
+    display:flex; align-items:baseline; justify-content:center; gap:16px;
+    margin:6px 0 4px;
+  }
+  .date-row .num{ font-size:40px; color:var(--navy); font-family:var(--display-en); }
+  .date-row .wk, .date-row .mo{ font-size:13px; letter-spacing:0.14em; color:#8a8271; }
+  .year{ font-size:18px; color:#8a8271; letter-spacing:0.06em; }
+
+  .countdown{
+    display:flex; justify-content:center; gap:14px; margin:30px auto 6px;
+    flex-wrap:wrap;
+  }
+  .countdown .cell{
+    background:var(--cream-soft); border:1px solid var(--line);
+    border-radius:6px; padding:14px 10px; min-width:70px;
+  }
+  .countdown .cell .num{ font-size:26px; color:var(--navy); font-family:var(--display-en); display:block; }
+  .countdown .cell .lbl{ font-size:10px; letter-spacing:0.12em; color:#8a8271; }
+
+  /* Calendar */
+  .calendar{
+    margin:36px auto 0; max-width:320px;
+    border:1px solid var(--gold-soft); border-radius:8px;
+    padding:22px 16px 20px; background:var(--cream);
+    position:relative;
+  }
+  .calendar .cal-title{ color:var(--navy); font-size:18px; margin-bottom:14px; }
+  .cal-grid{ display:grid; grid-template-columns:repeat(7,1fr); gap:6px 2px; }
+  .cal-grid .dow{ font-size:11px; color:#a99c7f; letter-spacing:.04em; padding-bottom:6px; border-bottom:1px solid var(--line); }
+  .cal-grid .day{ font-size:14px; color:var(--ink); padding:6px 0; }
+  .cal-grid .day.empty{ visibility:hidden; }
+  .cal-grid .day.the-day{
+    background:var(--navy); color:var(--cream); border-radius:50%;
+    width:26px; height:26px; margin:0 auto; display:flex; align-items:center; justify-content:center;
+  }
+
+  .btn-outline{
+    display:inline-block; margin-top:22px; padding:11px 26px;
+    border:1px solid var(--navy); border-radius:999px;
+    color:var(--navy); text-decoration:none; font-size:14px; letter-spacing:.03em;
+    background:transparent; cursor:pointer;
+  }
+  .btn-solid{
+    display:inline-block; margin-top:16px; padding:13px 36px;
+    background:var(--navy); color:var(--cream); border:none; border-radius:999px;
+    font-family:var(--display-en); font-size:16px; letter-spacing:.03em; cursor:pointer;
+    box-shadow:0 10px 22px rgba(27,54,84,0.25);
+  }
+  html[dir="rtl"] .btn-solid{ font-family:var(--serif-ar); }
+
+  .venue-name{ font-size:20px; color:var(--navy); margin-top:6px; }
+  .map-frame{
+    margin-top:22px; border-radius:8px; overflow:hidden;
+    border:1px solid var(--line); box-shadow:var(--shadow);
+  }
+  .map-frame iframe{ width:100%; height:230px; border:0; display:block; }
+
+  /* Dress code */
+  .swatches{ display:flex; justify-content:center; gap:14px; margin:22px 0 4px; flex-wrap:wrap; }
+  .swatch{ width:40px; height:40px; border-radius:50%; border:1px solid rgba(0,0,0,0.08); }
+
+  /* Schedule */
+  .schedule{ margin-top:30px; text-align:start; max-width:340px; margin-inline:auto; }
+  .schedule .row{
+    display:grid; grid-template-columns:64px 20px 1fr; align-items:center;
+    gap:2px; min-height:52px; position:relative;
+  }
+  .schedule .row:not(:last-child)::after{
+    content:""; position:absolute; inset-inline-start:73px; top:26px; bottom:-26px;
+    width:1px; background:var(--line);
+  }
+  .schedule .time{ color:#8a8271; font-size:13px; text-align:end; padding-inline-end:8px; }
+  .schedule .dot{ width:9px; height:9px; border-radius:50%; background:var(--navy); justify-self:center; z-index:1; }
+  .schedule .label{ color:var(--navy); font-size:17px; padding-inline-start:10px; }
+
+  /* Guestbook */
+  .gb-form{
+    margin-top:26px; text-align:start;
+    border:1px solid var(--line); border-radius:10px; padding:24px;
+    background:var(--cream-soft);
+  }
+  .gb-form label{ display:block; font-size:12px; letter-spacing:.06em; color:#8a8271; margin-bottom:6px; }
+  .gb-form input, .gb-form textarea{
+    width:100%; border:1px solid var(--line); border-radius:6px;
+    padding:11px 12px; font-size:15px; font-family:inherit; background:var(--cream);
+    margin-bottom:16px; color:var(--ink);
+  }
+  .gb-form textarea{ min-height:90px; resize:vertical; }
+  .gb-submit{
+    background:var(--navy); color:var(--cream); border:none;
+    padding:12px 28px; border-radius:999px; cursor:pointer;
+    font-family:var(--display-en); font-size:15px; letter-spacing:.03em;
+    display:block; margin-inline-start:auto;
+  }
+  html[dir="rtl"] .gb-submit{ font-family:var(--serif-ar); margin-inline-start:0; margin-inline-end:auto; }
+  .gb-note{ font-size:12px; color:#a99c7f; margin-top:10px; }
+
+  .wishes{ margin-top:26px; display:flex; flex-direction:column; gap:12px; text-align:start; }
+  .wish{
+    border:1px solid var(--line); border-radius:8px; padding:14px 16px;
+    background:var(--cream);
+  }
+  .wish .who{ color:var(--navy); font-weight:600; font-size:15px; }
+  .wish .when{ float:inline-end; font-size:11px; color:#a99c7f; }
+  .wish .msg{ margin-top:6px; font-size:14px; color:#4d4638; clear:both; }
+  .wishes-empty{ font-size:14px; color:#a99c7f; font-style:italic; margin-top:10px; }
+
+  footer{
+    text-align:center; padding:50px 22px 70px; color:#8a8271; font-size:13px;
+  }
+  footer .fnames{ font-size:20px; color:var(--navy); font-family:var(--display-en); margin-bottom:6px; }
+  html[dir="rtl"] footer .fnames{ font-family:var(--serif-ar); }
+
+  @media (max-width:420px){
+    section{ padding:60px 18px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="petals-bg"></div>
+
+<div class="lang-switch" role="group" aria-label="Language">
+  <button type="button" id="btn-en" class="active" onclick="setLang('en')">EN</button>
+  <button type="button" id="btn-ar" onclick="setLang('ar')">عربي</button>
+</div>
+
+<button class="music-btn paused" id="musicBtn" onclick="toggleMusic()" aria-label="Toggle music" title="Music">
+  <div class="bars"><span></span><span></span><span></span></div>
+</button>
+<audio id="bgMusic" loop preload="none">
+  <!-- Add your own licensed audio file here, e.g. music/song.mp3 -->
+  <source src="music/song.mp3" type="audio/mpeg">
+</audio>
+
+<!-- ============ COVER ============ -->
+<div class="cover" id="cover">
+  <div class="invite-card">
+    <svg class="corner tl" viewBox="0 0 60 60"><path d="M4 56 C4 30 10 10 40 6 M4 40 C14 26 20 16 34 12" stroke="#b8934f" stroke-width="1.2" fill="none" opacity="0.7"/><circle cx="40" cy="6" r="2.2" fill="#b8934f"/></svg>
+    <svg class="corner tr" viewBox="0 0 60 60"><path d="M4 56 C4 30 10 10 40 6 M4 40 C14 26 20 16 34 12" stroke="#b8934f" stroke-width="1.2" fill="none" opacity="0.7"/><circle cx="40" cy="6" r="2.2" fill="#b8934f"/></svg>
+    <svg class="corner bl" viewBox="0 0 60 60"><path d="M4 56 C4 30 10 10 40 6 M4 40 C14 26 20 16 34 12" stroke="#b8934f" stroke-width="1.2" fill="none" opacity="0.7"/><circle cx="40" cy="6" r="2.2" fill="#b8934f"/></svg>
+    <svg class="corner br" viewBox="0 0 60 60"><path d="M4 56 C4 30 10 10 40 6 M4 40 C14 26 20 16 34 12" stroke="#b8934f" stroke-width="1.2" fill="none" opacity="0.7"/><circle cx="40" cy="6" r="2.2" fill="#b8934f"/></svg>
+
+    <div class="display invite-names" data-i18n="cover.name1">Alaa</div>
+    <span class="invite-amp" data-i18n="common.amp">&amp;</span>
+    <div class="display invite-names" data-i18n="cover.name2">Marwan</div>
+
+    <div class="invite-rule"></div>
+    <div class="invite-date" data-i18n="cover.date">January 2, 2028</div>
+    <div class="invite-sub" data-i18n="cover.sub">Cordially Invites</div>
+
+    <button class="open-btn" onclick="openInvite()" data-i18n="cover.open">Open</button>
+  </div>
+</div>
+
+<!-- ============ SITE ============ -->
+<div class="site" id="site">
+
+  <!-- Ceremony intro -->
+  <section id="intro">
+    <p class="eyebrow" data-i18n="intro.eyebrow">Ceremony Info</p>
+    <h2 data-i18n="intro.title">We joyfully announce the wedding of our children</h2>
+
+    <div class="frame-wrap">
+      <svg viewBox="0 0 320 380" fill="none">
+        <path d="M160 12c-70 0-110 44-110 120v116c0 76 40 120 110 120s110-44 110-120V132c0-76-40-120-110-120Z"
+              stroke="#b8934f" stroke-width="1.4"/>
+        <path d="M160 26c-60 0-95 38-95 106v112c0 68 35 106 95 106s95-38 95-106V132c0-68-35-106-95-106Z"
+              stroke="#1b3654" stroke-width="1"/>
+        <g opacity="0.85" stroke="#8fae9a" stroke-width="1" fill="none">
+          <path d="M40 90 C20 110 20 150 40 180"/>
+          <path d="M280 90 C300 110 300 150 280 180"/>
+        </g>
+        <g>
+          <circle cx="46" cy="86" r="10" fill="#c7d6e6"/>
+          <circle cx="60" cy="70" r="8" fill="#eee6d3"/>
+          <circle cx="34" cy="200" r="9" fill="#3f5f82"/>
+          <circle cx="274" cy="86" r="10" fill="#c7d6e6"/>
+          <circle cx="260" cy="70" r="8" fill="#eee6d3"/>
+          <circle cx="286" cy="200" r="9" fill="#3f5f82"/>
+        </g>
+      </svg>
+      <div class="frame-names">
+        <div class="display n1" data-i18n="cover.name1">Alaa</div>
+        <span class="amp" data-i18n="common.amp">&amp;</span>
+        <div class="display n2" data-i18n="cover.name2">Marwan</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Groom -->
+  <section id="groom" class="couple-block">
+    <div class="couple-name display" data-i18n="cover.name2">Marwan</div>
+    <div class="couple-role" data-i18n="roles.groom">Groom</div>
+    <div class="couple-amp">&amp;</div>
+    <div class="couple-name display" data-i18n="cover.name1" style="margin-top:8px;">Alaa</div>
+    <div class="couple-role" data-i18n="roles.bride">Bride</div>
+
+    <div class="divider"><span>✦</span></div>
+
+    <p class="eyebrow" data-i18n="gallery.title">Engagement Moments</p>
+    <div class="gallery" id="galleryGrid">
+      <figure onclick="openLightbox('images/engagement-01.jpg')">
+        <img src="images/engagement-01.jpg" alt="Alaa & Marwan" loading="lazy">
+        <figcaption data-i18n="gallery.cap1">The reveal</figcaption>
+      </figure>
+      <figure onclick="openLightbox('images/engagement-06.jpg')">
+        <img src="images/engagement-06.jpg" alt="Alaa & Marwan with family" loading="lazy">
+        <figcaption data-i18n="gallery.cap6">With family</figcaption>
+      </figure>
+      <figure onclick="openLightbox('images/engagement-04.jpg')">
+        <img src="images/engagement-04.jpg" alt="Alaa & Marwan" loading="lazy">
+        <figcaption data-i18n="gallery.cap4">Hand in hand</figcaption>
+      </figure>
+      <figure onclick="openLightbox('images/engagement-02.jpg')">
+        <img src="images/engagement-02.jpg" alt="Alaa & Marwan" loading="lazy">
+        <figcaption data-i18n="gallery.cap2">A quiet moment</figcaption>
+      </figure>
+      <figure onclick="openLightbox('images/engagement-03.jpg')">
+        <img src="images/engagement-03.jpg" alt="Alaa & Marwan celebrating" loading="lazy">
+        <figcaption data-i18n="gallery.cap3">Celebrating</figcaption>
+      </figure>
+      <figure onclick="openLightbox('images/engagement-05.jpg')">
+        <img src="images/engagement-05.jpg" alt="Alaa & Marwan" loading="lazy">
+        <figcaption data-i18n="gallery.cap5">Among the flowers</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+    <button class="lightbox-close" onclick="closeLightbox(event)" aria-label="Close">&times;</button>
+    <img id="lightboxImg" src="" alt="">
+  </div>
+
+  <!-- Reception info -->
+  <section id="reception">
+    <p class="eyebrow" data-i18n="reception.eyebrow">Reception Info</p>
+    <h2 data-i18n="reception.title">The reception will take place at</h2>
+
+    <div class="time-big">20:00</div>
+    <div class="date-row">
+      <span class="wk" data-i18n="reception.weekday">SUNDAY</span>
+      <span class="num">02</span>
+      <span class="mo" data-i18n="reception.month">JANUARY</span>
+    </div>
+    <div class="year">2028</div>
+
+    <p class="eyebrow" style="margin-top:34px;" data-i18n="reception.countdown">Countdown</p>
+    <div class="countdown" id="countdown">
+      <div class="cell"><span class="num" id="cd-days">–</span><span class="lbl" data-i18n="cd.days">days</span></div>
+      <div class="cell"><span class="num" id="cd-hours">–</span><span class="lbl" data-i18n="cd.hours">hours</span></div>
+      <div class="cell"><span class="num" id="cd-mins">–</span><span class="lbl" data-i18n="cd.mins">min</span></div>
+      <div class="cell"><span class="num" id="cd-secs">–</span><span class="lbl" data-i18n="cd.secs">sec</span></div>
+    </div>
+
+    <div class="calendar">
+      <div class="cal-title display">January 2028</div>
+      <div class="cal-grid" id="calGrid"></div>
+    </div>
+
+    <div>
+      <button class="btn-outline" onclick="downloadICS()" data-i18n="reception.addcal">Add to Calendar</button>
+    </div>
+    <div>
+      <button class="btn-solid" onclick="document.getElementById('guestbook').scrollIntoView({behavior:'smooth'})" data-i18n="reception.rsvp">Confirm Attendance</button>
+    </div>
+  </section>
+
+  <!-- Venue -->
+  <section id="venue">
+    <p class="eyebrow" data-i18n="venue.eyebrow">Wedding Reception Venue</p>
+    <div class="venue-name" data-i18n="venue.name">Romanica Venue, Moqattam</div>
+    <div class="map-frame">
+      <iframe
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        src="https://www.google.com/maps?q=Romanica+Venue+Moqattam+Cairo&output=embed">
+      </iframe>
+    </div>
+    <div>
+      <a class="btn-outline" href="https://www.google.com/maps/search/?api=1&query=Romanica+Venue+Moqattam+Cairo" target="_blank" rel="noopener" data-i18n="venue.directions">Get Directions</a>
+    </div>
+  </section>
+
+  <!-- Dress code -->
+  <section id="dresscode">
+    <p class="eyebrow" data-i18n="dress.eyebrow">Dress Code</p>
+    <h2 data-i18n="dress.title">Party Attire</h2>
+    <div class="swatches">
+      <span class="swatch" style="background:#c98b83;"></span>
+      <span class="swatch" style="background:#7f93ac;"></span>
+      <span class="swatch" style="background:#ffffff; border-color:#ccc;"></span>
+      <span class="swatch" style="background:#d9a3a6;"></span>
+      <span class="swatch" style="background:#c7457a;"></span>
+    </div>
+  </section>
+
+  <!-- Schedule -->
+  <section id="schedule">
+    <p class="eyebrow" data-i18n="sched.eyebrow">Wedding Day Schedule</p>
+    <h2 data-i18n="sched.title">How the evening unfolds</h2>
+    <div class="schedule">
+      <div class="row"><span class="time">18:30</span><span class="dot"></span><span class="label" data-i18n="sched.welcome">Welcome</span></div>
+      <div class="row"><span class="time">19:45</span><span class="dot"></span><span class="label" data-i18n="sched.ready">Being ready</span></div>
+      <div class="row"><span class="time">20:00</span><span class="dot"></span><span class="label" data-i18n="sched.party">Party</span></div>
+      <div class="row"><span class="time">21:30</span><span class="dot"></span><span class="label" data-i18n="sched.buffet">Buffet</span></div>
+      <div class="row"><span class="time">22:15</span><span class="dot"></span><span class="label" data-i18n="sched.fire">Fire show</span></div>
+      <div class="row"><span class="time">00:00</span><span class="dot"></span><span class="label" data-i18n="sched.end">End</span></div>
+    </div>
+  </section>
+
+  <!-- Guestbook -->
+  <section id="guestbook">
+    <p class="eyebrow" data-i18n="gb.eyebrow">Guestbook</p>
+    <h2 data-i18n="gb.title">Leave your wishes</h2>
+
+    <form class="gb-form" id="gbForm">
+      <label for="gbName" data-i18n="gb.namelbl">Your name</label>
+      <input type="text" id="gbName" required data-i18n-ph="gb.nameph" placeholder="Enter your name*">
+      <label for="gbMsg" data-i18n="gb.msglbl">Your wishes</label>
+      <textarea id="gbMsg" required data-i18n-ph="gb.msgph" placeholder="Enter your wishes*"></textarea>
+      <button type="submit" class="gb-submit" data-i18n="gb.send">Send Wishes</button>
+      <p class="gb-note" data-i18n="gb.note">Wishes are saved on this device. To collect messages from every guest, connect the form to a service like Formspree or Google Sheets — see the code comments.</p>
+    </form>
+
+    <div class="wishes" id="wishesList"></div>
+  </section>
+
+  <footer>
+    <div class="fnames display">Alaa &amp; Marwan</div>
+    <div data-i18n="footer.line">January 2, 2028 · Romanica Venue, Moqattam</div>
+  </footer>
+
+</div>
+
+<script>
+/* ---------------- i18n ---------------- */
+const i18n = {
+  en: {
+    "common.amp": "&amp;",
+    "cover.name1": "Alaa",
+    "cover.name2": "Marwan",
+    "cover.date": "January 2, 2028",
+    "cover.sub": "Cordially Invites",
+    "cover.open": "Open",
+    "intro.eyebrow": "Ceremony Info",
+    "intro.title": "We joyfully announce the wedding of our children",
+    "roles.groom": "Groom",
+    "roles.bride": "Bride",
+    "gallery.title": "Engagement Moments",
+    "gallery.cap1": "The reveal",
+    "gallery.cap2": "A quiet moment",
+    "gallery.cap3": "Celebrating",
+    "gallery.cap4": "Hand in hand",
+    "gallery.cap5": "Among the flowers",
+    "gallery.cap6": "With family",
+    "reception.eyebrow": "Reception Info",
+    "reception.title": "The reception will take place at",
+    "reception.weekday": "SUNDAY",
+    "reception.month": "JANUARY",
+    "reception.countdown": "Countdown",
+    "reception.addcal": "Add to Calendar",
+    "reception.rsvp": "Confirm Attendance",
+    "cd.days": "days", "cd.hours": "hours", "cd.mins": "min", "cd.secs": "sec",
+    "venue.eyebrow": "Wedding Reception Venue",
+    "venue.name": "Romanica Venue, Moqattam",
+    "venue.directions": "Get Directions",
+    "dress.eyebrow": "Dress Code",
+    "dress.title": "Party Attire",
+    "sched.eyebrow": "Wedding Day Schedule",
+    "sched.title": "How the evening unfolds",
+    "sched.welcome": "Welcome",
+    "sched.ready": "Being ready",
+    "sched.party": "Party",
+    "sched.buffet": "Buffet",
+    "sched.fire": "Fire show",
+    "sched.end": "End",
+    "gb.eyebrow": "Guestbook",
+    "gb.title": "Leave your wishes",
+    "gb.namelbl": "Your name",
+    "gb.nameph": "Enter your name*",
+    "gb.msglbl": "Your wishes",
+    "gb.msgph": "Enter your wishes*",
+    "gb.send": "Send Wishes",
+    "gb.note": "Wishes are saved on this device. To collect messages from every guest, connect the form to a service like Formspree or Google Sheets — see the code comments.",
+    "gb.empty": "Be the first to leave a wish.",
+    "footer.line": "January 2, 2028 · Romanica Venue, Moqattam"
+  },
+  ar: {
+    "common.amp": "&amp;",
+    "cover.name1": "علاء",
+    "cover.name2": "مروان",
+    "cover.date": "٢ يناير ٢٠٢٨",
+    "cover.sub": "يتشرفان بدعوتكم",
+    "cover.open": "افتح الدعوة",
+    "intro.eyebrow": "معلومات الحفل",
+    "intro.title": "يسعدنا أن نعلن زواج أبنائنا",
+    "roles.groom": "العريس",
+    "roles.bride": "العروسة",
+    "gallery.title": "لحظات الخطوبة",
+    "gallery.cap1": "لحظة الإعلان",
+    "gallery.cap2": "لحظة هادئة",
+    "gallery.cap3": "الاحتفال",
+    "gallery.cap4": "يداً بيد",
+    "gallery.cap5": "بين الورود",
+    "gallery.cap6": "مع العائلة",
+    "reception.eyebrow": "معلومات حفل الاستقبال",
+    "reception.title": "سيقام حفل الاستقبال في",
+    "reception.weekday": "الأحد",
+    "reception.month": "يناير",
+    "reception.countdown": "العد التنازلي",
+    "reception.addcal": "أضف إلى التقويم",
+    "reception.rsvp": "تأكيد الحضور",
+    "cd.days": "يوم", "cd.hours": "ساعة", "cd.mins": "دقيقة", "cd.secs": "ثانية",
+    "venue.eyebrow": "مكان حفل الاستقبال",
+    "venue.name": "رومانيكا، المقطم",
+    "venue.directions": "الاتجاهات",
+    "dress.eyebrow": "الزي المطلوب",
+    "dress.title": "زي الحفلة",
+    "sched.eyebrow": "جدول يوم الزفاف",
+    "sched.title": "برنامج السهرة",
+    "sched.welcome": "الترحيب",
+    "sched.ready": "التجهيز",
+    "sched.party": "الحفلة",
+    "sched.buffet": "البوفيه",
+    "sched.fire": "عرض النار",
+    "sched.end": "النهاية",
+    "gb.eyebrow": "سجل الضيوف",
+    "gb.title": "اترك تهنئتك",
+    "gb.namelbl": "اسمك",
+    "gb.nameph": "اكتب اسمك*",
+    "gb.msglbl": "تهنئتك",
+    "gb.msgph": "اكتب تهنئتك*",
+    "gb.send": "إرسال التهنئة",
+    "gb.note": "يتم حفظ التهنئات على هذا الجهاز فقط. لجمع رسائل كل الضيوف، اربط النموذج بخدمة مثل Formspree أو Google Sheets — راجع تعليقات الكود.",
+    "gb.empty": "كن أول من يترك تهنئة.",
+    "footer.line": "٢ يناير ٢٠٢٨ · رومانيكا، المقطم"
+  }
+};
+
+function applyLang(lang){
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+  document.getElementById('btn-en').classList.toggle('active', lang==='en');
+  document.getElementById('btn-ar').classList.toggle('active', lang==='ar');
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key = el.getAttribute('data-i18n');
+    if(i18n[lang][key]!==undefined) el.innerHTML = i18n[lang][key];
+  });
+  document.querySelectorAll('[data-i18n-ph]').forEach(el=>{
+    const key = el.getAttribute('data-i18n-ph');
+    if(i18n[lang][key]!==undefined) el.setAttribute('placeholder', i18n[lang][key]);
+  });
+  renderWishes(lang);
+  localStorage.setItem('am_lang', lang);
+}
+function setLang(lang){ applyLang(lang); }
+(function initLang(){
+  const saved = localStorage.getItem('am_lang') || 'en';
+  applyLang(saved);
+})();
+
+/* ---------------- Lightbox ---------------- */
+function openLightbox(src){
+  document.getElementById('lightboxImg').src = src;
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLightbox(e){
+  if(e.target.id === 'lightbox' || e.target.classList.contains('lightbox-close') || e.target.tagName==='BUTTON'){
+    document.getElementById('lightbox').classList.remove('open');
+    document.getElementById('lightboxImg').src = '';
+  }
+}
+
+/* ---------------- Cover open ---------------- */
+function openInvite(){
+  document.getElementById('cover').classList.add('hidden');
+  const site = document.getElementById('site');
+  site.classList.add('revealed');
+  const music = document.getElementById('bgMusic');
+  music.play().then(()=>{
+    document.getElementById('musicBtn').classList.remove('paused');
+  }).catch(()=>{ /* autoplay blocked until user later taps the music button */ });
+}
+
+/* ---------------- Music toggle ---------------- */
+function toggleMusic(){
+  const music = document.getElementById('bgMusic');
+  const btn = document.getElementById('musicBtn');
+  if(music.paused){
+    music.play().catch(()=>{});
+    btn.classList.remove('paused');
+  } else {
+    music.pause();
+    btn.classList.add('paused');
+  }
+}
+
+/* ---------------- Countdown ---------------- */
+const WEDDING_DATE = new Date('2028-01-02T20:00:00');
+function tickCountdown(){
+  const now = new Date();
+  let diff = WEDDING_DATE - now;
+  if(diff < 0) diff = 0;
+  const days = Math.floor(diff/(1000*60*60*24));
+  const hours = Math.floor((diff/(1000*60*60))%24);
+  const mins = Math.floor((diff/(1000*60))%60);
+  const secs = Math.floor((diff/1000)%60);
+  document.getElementById('cd-days').textContent = days;
+  document.getElementById('cd-hours').textContent = String(hours).padStart(2,'0');
+  document.getElementById('cd-mins').textContent = String(mins).padStart(2,'0');
+  document.getElementById('cd-secs').textContent = String(secs).padStart(2,'0');
+}
+setInterval(tickCountdown, 1000);
+tickCountdown();
+
+/* ---------------- Calendar (Jan 2028) ---------------- */
+function buildCalendar(){
+  const grid = document.getElementById('calGrid');
+  const dows = ['Mo','Tu','We','Th','Fr','Sa','Su'];
+  dows.forEach(d=>{
+    const el = document.createElement('div');
+    el.className = 'dow'; el.textContent = d;
+    grid.appendChild(el);
+  });
+  // Jan 1 2028 is a Saturday -> Mon-first offset = 5 empty cells
+  const leadingEmpty = 5;
+  for(let i=0;i<leadingEmpty;i++){
+    const el = document.createElement('div');
+    el.className = 'day empty';
+    grid.appendChild(el);
+  }
+  for(let day=1; day<=31; day++){
+    const el = document.createElement('div');
+    el.className = 'day' + (day===2 ? ' the-day' : '');
+    el.textContent = day;
+    grid.appendChild(el);
+  }
+}
+buildCalendar();
+
+/* ---------------- Add to calendar (.ics) ---------------- */
+function downloadICS(){
+  const ics = [
+    'BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Alaa Marwan Wedding//EN','BEGIN:VEVENT',
+    'UID:'+Date.now()+'@alaa-marwan-wedding',
+    'DTSTAMP:'+icsDate(new Date()),
+    'DTSTART:'+icsDate(new Date('2028-01-02T18:30:00')),
+    'DTEND:'+icsDate(new Date('2028-01-03T00:00:00')),
+    'SUMMARY:Alaa & Marwan\'s Wedding',
+    'LOCATION:Romanica Venue, Moqattam, Cairo',
+    'DESCRIPTION:Join us to celebrate the wedding of Alaa & Marwan.',
+    'END:VEVENT','END:VCALENDAR'
+  ].join('\r\n');
+  const blob = new Blob([ics], {type:'text/calendar'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'alaa-marwan-wedding.ics';
+  a.click();
+}
+function icsDate(d){
+  return d.getUTCFullYear()+pad(d.getUTCMonth()+1)+pad(d.getUTCDate())+'T'+pad(d.getUTCHours())+pad(d.getUTCMinutes())+pad(d.getUTCSeconds())+'Z';
+}
+function pad(n){ return String(n).padStart(2,'0'); }
+
+/* ---------------- Guestbook ----------------
+   NOTE: This stores wishes in the visitor's own browser (localStorage),
+   so it works instantly with zero setup, but each guest only sees the
+   wishes typed on their own device/browser — not a shared list.
+   To collect every guest's wishes in one place for you and Marwan to read,
+   swap the code in gbForm's submit handler below to POST to a form
+   backend such as Formspree (https://formspree.io) or a Google Sheets
+   web app, then read the submissions there instead of localStorage. */
+function getWishes(){
+  return JSON.parse(localStorage.getItem('am_wishes') || '[]');
+}
+function saveWish(name, msg){
+  const wishes = getWishes();
+  wishes.unshift({name, msg, date: new Date().toLocaleString()});
+  localStorage.setItem('am_wishes', JSON.stringify(wishes));
+}
+function renderWishes(lang){
+  const list = document.getElementById('wishesList');
+  const wishes = getWishes();
+  list.innerHTML = '';
+  if(wishes.length === 0){
+    const p = document.createElement('p');
+    p.className = 'wishes-empty';
+    p.textContent = i18n[lang]['gb.empty'];
+    list.appendChild(p);
+    return;
+  }
+  wishes.forEach(w=>{
+    const div = document.createElement('div');
+    div.className = 'wish';
+    div.innerHTML = `<span class="when">${w.date}</span><span class="who">${escapeHTML(w.name)}</span><div class="msg">${escapeHTML(w.msg)}</div>`;
+    list.appendChild(div);
+  });
+}
+function escapeHTML(str){
+  const d = document.createElement('div');
+  d.textContent = str;
+  return d.innerHTML;
+}
+document.getElementById('gbForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const name = document.getElementById('gbName').value.trim();
+  const msg = document.getElementById('gbMsg').value.trim();
+  if(!name || !msg) return;
+  saveWish(name, msg);
+  this.reset();
+  renderWishes(document.documentElement.lang || 'en');
+});
+</script>
+</body>
+</html>
